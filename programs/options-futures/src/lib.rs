@@ -21,4 +21,12 @@ pub mod options_futures {
     pub fn update(ctx: Context<Update>, params: UpdateParams) -> Result<()> {
         Update::actuate(ctx, &params)
     }
+
+    #[access_control(ctx.accounts.validate(&ctx, &params))]
+    pub fn initialize_multisig(
+        ctx: Context<InitializeMultisig>,
+        params: InitializeMultisigParams,
+    ) -> Result<()> {
+        InitializeMultisig::actuate(ctx, params)
+    }
 }

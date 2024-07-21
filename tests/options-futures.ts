@@ -48,6 +48,21 @@ describe("options-futures", () => {
       .rpc();
     console.log("Your transaction signature", tx);
   });
+  it("Is multisig initialized!", async () => {
+    const tx = await program.methods
+      .initializeMultisig({
+        threshold: new anchor.BN(2),
+        signers: [signer1.publicKey, signer2.publicKey, myAccount.publicKey],
+      })
+      .accounts({
+        payer: program.provider.publicKey,
+        signer1: signer1.publicKey,
+        signer2: signer2.publicKey,
+      })
+      .signers([signer1, signer2])
+      .rpc();
+    console.log("Your transaction signature", tx);
+  });
   it("Updates", async () => {
     const tx = await program.methods
       .update({ data: new anchor.BN(45) })
