@@ -38,7 +38,7 @@ describe("options-futures", () => {
     console.log("sendLamportsTxnId", sendLamportsTxnId);
 
     const tx = await program.methods
-      .initialize()
+      .initialize({})
       .accounts({
         myAccount: myAccount.publicKey,
         signer1: signer1.publicKey,
@@ -50,7 +50,7 @@ describe("options-futures", () => {
   });
   it("Updates", async () => {
     const tx = await program.methods
-      .update(new anchor.BN(45))
+      .update({ data: new anchor.BN(45) })
       .accounts({
         myAccount: myAccount.publicKey,
         authority: signer2.publicKey,
