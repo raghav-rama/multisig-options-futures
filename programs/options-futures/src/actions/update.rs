@@ -13,7 +13,7 @@ pub struct Update<'info> {
 pub struct UpdateParams {
     data: u64,
 }
-impl<'info> Update<'_> {
+impl Update<'_> {
     pub fn validate(&self, _ctx: &Context<Self>, _params: &UpdateParams) -> Result<()> {
         Ok(())
     }

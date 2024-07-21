@@ -17,8 +17,8 @@ pub struct Initialize<'info> {
 #[derive(Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct InitializeParams {}
 
-impl<'info> Initialize<'_> {
-    pub fn validate<'a>(&self, _ctx: &Context<Self>, _params: &InitializeParams) -> Result<()> {
+impl Initialize<'_> {
+    pub fn validate(&self, _ctx: &Context<Self>, _params: &InitializeParams) -> Result<()> {
         Ok(())
     }
     pub fn actuate(ctx: Context<Self>, _params: &InitializeParams) -> Result<()> {
