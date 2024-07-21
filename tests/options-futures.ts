@@ -56,12 +56,36 @@ describe("options-futures", () => {
       })
       .accounts({
         payer: program.provider.publicKey,
-        signer1: signer1.publicKey,
+        signer1: myAccount.publicKey,
         signer2: signer2.publicKey,
       })
-      .signers([signer1, signer2])
+      .signers([myAccount, signer2])
       .rpc();
     console.log("Your transaction signature", tx);
+  });
+  it("Is proposed", async () => {
+    try {
+      const underlyingAssest = anchor.web3.Keypair.generate();
+      const tx = await program.methods
+        .proposeTrade({
+          underlyingAsset: underlyingAssest.publicKey,
+          strikePrice: new anchor.BN(100),
+          expirationUnixTimestamp: new anchor.BN(1000000000),
+          quantity: new anchor.BN(100),
+          premiumOrPrice: new anchor.BN(100),
+          tradeType: { call: {} },
+        })
+        .accounts({
+          proposer: program.provider.publicKey,
+          signer1: myAccount.publicKey,
+          signer2: signer2.publicKey,
+        })
+        .signers([myAccount, signer2])
+        .rpc();
+      console.log("Your transaction signature", tx);
+    } catch (error) {
+      console.log("Error", error);
+    }
   });
   it("Updates", async () => {
     const tx = await program.methods

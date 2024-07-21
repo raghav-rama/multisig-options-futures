@@ -29,4 +29,9 @@ pub mod options_futures {
     ) -> Result<()> {
         InitializeMultisig::actuate(ctx, params)
     }
+
+    #[access_control(ctx.accounts.validate(&ctx, &params))]
+    pub fn propose_trade(ctx: Context<ProposeTrade>, params: ProposeTradeParams) -> Result<()> {
+        ProposeTrade::actuate(ctx, &params)
+    }
 }

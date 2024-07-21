@@ -42,7 +42,7 @@ pub struct TradeProposal {
     pub approvals: [Pubkey; MAX_SIGNERS], // Signers who have approved (fixed-size array)
 }
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq)]
+#[derive(AnchorSerialize, AnchorDeserialize, Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
 pub enum TradeType {
     Call = 0,
@@ -70,7 +70,7 @@ impl From<u8> for TradeType {
     }
 }
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq)]
+#[derive(AnchorSerialize, AnchorDeserialize, Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
 pub enum ProposalStatus {
     Proposed = 0,
