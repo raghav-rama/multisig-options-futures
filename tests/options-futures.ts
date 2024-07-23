@@ -13,7 +13,7 @@ describe("options-futures", () => {
   console.log("Signer", program.provider.publicKey.toBase58());
 
   const secretKey = JSON.parse(
-    fs.readFileSync("/home/hackerboy/.config/solana/id.json", "utf-8")
+    fs.readFileSync("~/.config/solana/id.json", "utf-8")
   );
 
   const signer1 = anchor.web3.Keypair.fromSecretKey(new Uint8Array(secretKey));
