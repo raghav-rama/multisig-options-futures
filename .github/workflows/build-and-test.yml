@@ -26,7 +26,10 @@ jobs:
       - name: Install Deps
         run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y pkg-config build-essential libudev-dev libssl-dev
       - name: Install Anchor
-        run: cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+        run:
+          cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+          avm install latest
+          avm use latest
 
       - name: Cache Yarn dependencies
         uses: actions/cache@v3
