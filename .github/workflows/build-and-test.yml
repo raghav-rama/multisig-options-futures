@@ -1,0 +1,45 @@
+name: Anchor Test
+
+on:
+  push:
+    branches:
+      - master # Or your desired branch
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - run: npm install -g yarn
+
+      - name: Install Rust
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      - name: Install Solana CLI
+        run: sh -c "$(curl -sSfL https://release.solana.com/edge/install)"
+      - name: Install Deps
+        run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y pkg-config build-essential libudev-dev libssl-dev
+      - name: Install Anchor
+        run: cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/yarn
+            ${{ github.workspace }}/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Anchor tests
+        run: anchor test
