@@ -28,6 +28,7 @@ jobs:
       - name: Install Anchor
         run: |
           cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+          avm install latest
           avm use latest
 
       - name: Cache Yarn dependencies
