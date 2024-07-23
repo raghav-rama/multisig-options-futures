@@ -48,6 +48,7 @@ describe("options-futures", () => {
       .rpc();
     console.log("Your transaction signature", tx);
   });
+
   it("Is multisig initialized!", async () => {
     const tx = await program.methods
       .initializeMultisig({
@@ -63,6 +64,7 @@ describe("options-futures", () => {
       .rpc();
     console.log("Your transaction signature", tx);
   });
+
   it("Is proposed", async () => {
     try {
       const underlyingAssest = anchor.web3.Keypair.generate();
@@ -87,6 +89,7 @@ describe("options-futures", () => {
       console.log("Error", error);
     }
   });
+
   it("Updates", async () => {
     const tx = await program.methods
       .update({ data: new anchor.BN(45) })
