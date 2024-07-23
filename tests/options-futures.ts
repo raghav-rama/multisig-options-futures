@@ -3,6 +3,7 @@ import { Program } from "@coral-xyz/anchor";
 import { OptionsFutures } from "../target/types/options_futures";
 import * as fs from "fs";
 import { assert } from "chai";
+import "dotenv/config";
 
 describe("options-futures", () => {
   // Configure the client to use the local cluster.
@@ -12,9 +13,8 @@ describe("options-futures", () => {
   console.log("Program ID", program.programId.toBase58());
   console.log("Signer", program.provider.publicKey.toBase58());
 
-  const secretKey = JSON.parse(
-    fs.readFileSync("~/.config/solana/id.json", "utf-8")
-  );
+  const KEYPAIR_PATH = `${process.env.HOME}/.config/solana/id.json`;
+  const secretKey = JSON.parse(fs.readFileSync(KEYPAIR_PATH, "utf-8"));
 
   const signer1 = anchor.web3.Keypair.fromSecretKey(new Uint8Array(secretKey));
   const signer2 = anchor.web3.Keypair.generate();
