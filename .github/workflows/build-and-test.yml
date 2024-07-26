@@ -21,8 +21,8 @@ jobs:
 
       - name: Install Rust
         run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-      - name: Install Solana CLI using Anza
-        run: sh -c "$(curl -sSfL https://release.anza.xyz/edge/install)"
+      - name: Install Solana CLI
+        run: sh -c "$(curl -sSfL https://release.solana.com/edge/install)"
       - name: Add Solana to PATH
         run: echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
       - name: Install Deps
