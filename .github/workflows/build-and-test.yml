@@ -20,7 +20,7 @@ jobs:
       - run: npm install -g yarn
 
       - name: Install Rust
-        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain 1.79.0 -y
       - name: Install Solana CLI
         run: sh -c "$(curl -sSfL https://release.solana.com/edge/install)"
       - name: Add Solana to PATH
